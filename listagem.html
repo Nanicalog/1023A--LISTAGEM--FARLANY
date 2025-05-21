@@ -33,15 +33,16 @@
         }
 
         /*container principal listagem*/
-       .container {
-    text-align: center;
-    border: 2px solid #590202; /* Aumentado de 2px para 5px */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 0 auto;
-       }
+     .container {
+    text-align: center; /* Centraliza o conteúdo dentro co conatiner */
+    border: 2px solid #590202; /* Cria uma borda de 2 pixels com a cor vinho escuro */
+    padding: 30px; /* Adiciona um espaçamento interno de 30px em todos os lados */
+    border-radius: 20px; /* Arredonda os cantos do container em 10px */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adiciona uma sombra ao redor do container */
+    max-width: 400px; /* Define a largura máxima do container como 400px */
+    margin: 0 auto; /* Centraliza o container horizontalmente na página */
+}
+
         /* Botões */
         button {
             background-color: #590202;
@@ -55,12 +56,12 @@
         }
 
         button:hover {
-            background-color: #7a0404; /*muda a cor do botão ao passarem cima com o mouse*/
+            background-color: #7a0404; /*muda a cor do botão ao passar por cima com o mouse*/
         }
 
         /* Campo de texto */
         input[type="text"] {
-            padding: 10px;
+            padding: 10px; 
             width: 80%;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -68,7 +69,6 @@
             font-size: 16px;
         }
     
-
         /* Lista */
         ul {
             list-style-type: none;
@@ -132,7 +132,7 @@
             const input = document.getElementById("produtoInput");  //Remove espaços em branco
 
             if (produto !== "") {  // Verifica se o campo não está vazio
-                const li = document.createElement("li"); // Cria um novo item de lista (li)
+                const li = document.createElement("lista"); // Cria um novo item de lista (li)
 
                 li.textContent = produto; // Define o conteúdo do item de lista com o texto do produto
                 document.getElementById("listaProdutos").appendChild(li);// Adiciona o item de lista dentro do elemento <ul> que mostra os produtos

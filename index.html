@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Título Modificado</title>
-    <style>
-         /* Fonte padrão da página */
-        body {
+</head>
+<style>
+    /*padrao da pagina*/
+      body {
             font-family: 'Times New Roman', Times, serif;
             background-color: #ffffff;
             color: #590202;
@@ -14,7 +15,7 @@
             padding: 0;
         }
 
-        /* Cabeçalho fixo simples */
+        /* Cabeçalho*/
         header {
             background-color: #590202;;
             color: #fffefe;
@@ -26,6 +27,7 @@
             width: 100%;
             z-index: 1000;
         }
+        /*rodape*/
         footer{
              background-color: #590202;;
             color: #fffefe;
@@ -33,59 +35,41 @@
             text-align: center;
         }
        
-    </style>
-</head>
+</style>
+
 <body>
-    
-    <!-- Link para a pagina de listagem de produtos -->
-    <a href="./listagem.html">Link listagem De Produtos</a>
+    <a href="./listagem.html">Link Para listagem de produtos</a>
+    <h1>Lista de sapatos!</h1>
+  <ul id="minhalista">
 
-    <!-- Tiulo da seção principal -->
-    <h1>Lista de Produtos!</h1>
-
-    <!-- Lista onde os produtos serão inseridos dinamicamente -->
-    <ul id="minhalista"></ul>
-
-    <!-- Script JavaScript para buscar os dados do backend -->
+    </ul>
     <script>
-        // Função assíncrona para buscar os dados da API
-        async function buscaDados() {
-            const resposta = await fetch("http://localhost:8000/lista") // Faz a requisição para o servidor
-
-            console.log(resposta) // Mostra a resposta no console (útil para depuração)
-
-            if (resposta.status === 200) {
-                const dados = await resposta.json() // Converte a resposta em JSON
-                console.log(dados) // Mostra os dados no console
-                console.log(dados[0].nome) // Exemplo: imprime o nome do primeiro item
-
-                const ul = document.getElementById("minhalista") // Seleciona a lista no HTML
-
-                // Laço que percorre todos os produtos retornados
+        async function buscaDados(){
+            const resposta = await fetch("http://localhost:8000/lista")
+            console.log(resposta)
+            if(resposta.status ===200){
+                const dados = await resposta.json()
+                console.log(dados)
+                console.log(dados[0].nome)
+                const ul = document.getElementById("minhalista")
                 for (let i = 0; i < dados.length; i++) {
-                    const element = dados[i]; // Pega o produto atual
-                    const novoli = document.createElement("li") // Cria um novo item de lista (li)
-                    novoli.innerText = element.nome // Insere o nome do produto no item
-                    ul.appendChild(novoli) // Adiciona o item à lista no HTML
+                    const element = dados[i];
+                    const novoli = document.createElement("lista")
+                    novoli.innerText = element.nome
+                    ul.appendChild(novoli)
                 }
-            } else {
-                // Se a requisição falhar com erro conhecido
-                if (resposta.status === 400) {
-                    const dados = await resposta.json() // Pega a mensagem de erro
-                    alert(dados.mensagem) // Exibe o alerta com a mensagem
-                } else {
-                    alert("ERRO NÃO IDENTIFICADO"); // Alerta para erro desconhecido
+
+            }else{
+                if(resposta.status ===400){
+                    const dados = await resposta.json()
+                    alert(dados.mensagem)
+                }
+                else{
+                    alert("ERRO NÃO IDENTIFICADO");
                 }
             }
         }
-
-        // Chama a função assim que a página carregar
-        buscaDados();
+        buscaDados()
     </script>
-
-    <!-- Rodapé da página (está vazio no momento, mas pode ter informações depois) -->
-    <footer>
-    </footer>
-
 </body>
 </html>

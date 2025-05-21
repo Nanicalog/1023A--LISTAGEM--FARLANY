@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título Modificado</title>
+    <style>
+         /* Fonte padrão da página */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #ffffff;
+            color: #590202;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cabeçalho fixo simples */
+        header {
+            background-color: #590202;;
+            color: #fffefe;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid #590202;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        footer{
+             background-color: #590202;;
+            color: #fffefe;
+            padding: 20px 0;
+            text-align: center;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <!-- Link para a pagina de listagem de produtos -->
+    <a href="./listagem.html">Link listagem De Produtos</a>
+
+    <!-- Tiulo da seção principal -->
+    <h1>Lista de Produtos!</h1>
+
+    <!-- Lista onde os produtos serão inseridos dinamicamente -->
+    <ul id="minhalista"></ul>
+
+    <!-- Script JavaScript para buscar os dados do backend -->
+    <script>
+        // Função assíncrona para buscar os dados da API
+        async function buscaDados() {
+            const resposta = await fetch("http://localhost:8000/lista") // Faz a requisição para o servidor
+
+            console.log(resposta) // Mostra a resposta no console (útil para depuração)
+
+            if (resposta.status === 200) {
+                const dados = await resposta.json() // Converte a resposta em JSON
+                console.log(dados) // Mostra os dados no console
+                console.log(dados[0].nome) // Exemplo: imprime o nome do primeiro item
+
+                const ul = document.getElementById("minhalista") // Seleciona a lista no HTML
+
+                // Laço que percorre todos os produtos retornados
+                for (let i = 0; i < dados.length; i++) {
+                    const element = dados[i]; // Pega o produto atual
+                    const novoli = document.createElement("li") // Cria um novo item de lista (li)
+                    novoli.innerText = element.nome // Insere o nome do produto no item
+                    ul.appendChild(novoli) // Adiciona o item à lista no HTML
+                }
+            } else {
+                // Se a requisição falhar com erro conhecido
+                if (resposta.status === 400) {
+                    const dados = await resposta.json() // Pega a mensagem de erro
+                    alert(dados.mensagem) // Exibe o alerta com a mensagem
+                } else {
+                    alert("ERRO NÃO IDENTIFICADO"); // Alerta para erro desconhecido
+                }
+            }
+        }
+
+        // Chama a função assim que a página carregar
+        buscaDados();
+    </script>
+
+    <!-- Rodapé da página (está vazio no momento, mas pode ter informações depois) -->
+    <footer>
+    </footer>
+
+</body>
+</html>

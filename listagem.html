@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Produtos</title>
+    <style>
+       body {
+        background-color: rgba(165, 92, 92, 0.85); /* vermelho clarto com transparência */
+         font-family: 'Times New Roman', Times, serif;
+        color: #590202;
+        margin: 0;
+        padding: 0;
+     }
+        /* Cabeçalho*/
+        header {
+            background-color: #590202;
+            color: #fffefe;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 0px solid #590202;
+            position: fixed;
+            font-size: 20px;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        /*rodapé*/
+        footer{
+             background-color: #590202;;
+            color: #fffefe;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /*container principal listagem*/
+       .container {
+    text-align: center;
+    border: 2px solid #590202; /* Aumentado de 2px para 5px */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 0 auto;
+       }
+        /* Botões */
+        button {
+            background-color: #590202;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #7a0404; /*muda a cor do botão ao passarem cima com o mouse*/
+        }
+
+        /* Campo de texto */
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    
+
+        /* Lista */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #ccc;
+        }
+
+        li {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        /* Alinha tudo ao centro na vertical */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            padding: 20px;
+        }
+     /* Estilo para o vídeo ocupar a tela toda como fundo */
+       #videoFundo {
+         position: fixed; /* fixa na tela */
+        top: 0;
+        left: 0;
+        width: 100vw;/* largura total da tela */
+        height: 100vh;/* altura total da tela */
+        object-fit: cover;/* cobre toda a área sem distorcer */
+        z-index: -1;/* fica atrás de todo o conteúdo */
+       }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho do site -->
+    <header>
+        <h1>Maison Evangeline</h1>
+    </header>
+<!-- Vídeo de fundo em tela cheia -->
+<video autoplay muted loop id="videoFundo"> <!-- Deixa o vídeo sem som (muted); loop(faz o videio recomeçar de novo)-->
+
+    <source src="https://cdn.cosmos.so/e6c9a9ac-c3a5-41fe-a7c0-06ba091a3033.mp4" type="video/mp4">
+</video>
+    <main>
+        <div class="container">
+            <input type="text" id="produtoInput" placeholder="Digite o nome do produto"> <!--input para adicionar o produto-->
+
+            <div>
+                <button onclick="adicionarProduto()">Adicionar</button> <!--botão para adicionar-->
+                <button onclick="limparLista()">Limpar Lista</button> <!--botão para limpar-->
+            </div>
+
+            <ul id="listaProdutos"></ul> <!-- Lista onde os produtos adicionados serão exibidos -->
+        </div>
+    </main>
+
+    <script>
+        /*script para fazer a listagem dos iten*/
+        function adicionarProduto() {  // Pega o elemento de input onde o usuário digita o nome do produto
+            const input = document.getElementById("produtoInput");  //Remove espaços em branco extras antes e depois do texto digitado
+            const produto = input.value.trim();
+
+            if (produto !== "") {  // Verifica se o campo não está vazio
+                const li = document.createElement("li"); // Cria um novo item de lista (li)
+
+                li.textContent = produto; // Define o conteúdo do item de lista com o texto do produto
+                document.getElementById("listaProdutos").appendChild(li);// Adiciona o item de lista dentro do elemento <ul> que mostra os produtos
+
+                input.value = "";// Limpa o campo de input para digitar um novo produto
+            }
+        }
+
+        function limparLista() { // Função para limpar toda a lista de produtos
+
+            document.getElementById("listaProdutos").innerHTML = ""; // Define o conteúdo do <ul> como vazio, apagando todos os itens
+        }
+    </script>
+    <footer>
+        2025 Maison evanegline todos os direitos
+    </footer>
+
+</body>
+</html>

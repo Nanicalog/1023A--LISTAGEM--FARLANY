@@ -127,10 +127,9 @@
     </main>
 
     <script>
-        /*script para fazer a listagem dos iten*/
-        function adicionarProduto() {  // Pega o elemento de input onde o usuário digita o nome do produto
-            const input = document.getElementById("produtoInput");  //Remove espaços em branco extras antes e depois do texto digitado
-            const produto = input.value.trim();
+        /*script para fazer a listagem dos produtos(sapatos)*/
+        function adicionarProduto() {  // coloca o elemento de input onde o usuário digita o nome do produto
+            const input = document.getElementById("produtoInput");  //Remove espaços em branco
 
             if (produto !== "") {  // Verifica se o campo não está vazio
                 const li = document.createElement("li"); // Cria um novo item de lista (li)
@@ -142,9 +141,9 @@
             }
         }
 
-        function limparLista() { // Função para limpar toda a lista de produtos
+        function limparLista() { //limpar toda a lista de produtos
 
-            document.getElementById("listaProdutos").innerHTML = ""; // Define o conteúdo do <ul> como vazio, apagando todos os itens
+            document.getElementById("listaProdutos").innerHTML = ""; // Define o conteudo do <ul> como vazio, apagando todos os itens
         }
     </script>
     <footer>

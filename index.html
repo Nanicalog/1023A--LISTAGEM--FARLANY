@@ -1,75 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título Modificado</title>
-</head>
-<style>
-    /*padrao da pagina*/
-      body {
-            font-family: 'Times New Roman', Times, serif;
+    <title>Lista de Sapatos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Fonte e fundo da página */
+        body {
+            font-family: 'Playfair Display', serif;
             background-color: #ffffff;
             color: #590202;
             margin: 0;
             padding: 0;
         }
 
-        /* Cabeçalho*/
+        /* Cabeçalho */
         header {
-            background-color: #590202;;
+            background-color: #590202;
             color: #fffefe;
             padding: 20px 0;
             text-align: center;
-            border-bottom: 2px solid #590202;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
         }
-        /*rodape*/
-        footer{
-             background-color: #590202;;
+
+        /* Espaço entre cabeçalho e conteúdo */
+        main {
+            padding-top: 100px;
+            text-align: center;
+        }
+
+        /* Lista */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        /* Link */
+        .link-central {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #590202;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .link-central:hover {
+            background-color: #7a0404;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #590202;
             color: #fffefe;
             padding: 20px 0;
             text-align: center;
+            margin-top: 40px;
         }
-       
-</style>
-
+    </style>
+</head>
 <body>
-    <a href="./listagem.html">Link Para listagem de produtos</a>
-    <h1>Lista de sapatos!</h1>
-  <ul id="minhalista">
 
-    </ul>
+    <header>
+        <h1>Maison Evangeline</h1>
+    </header>
+
+    <main>
+        <a class="link-central" href="./listagem.html">Ir para a Listagem de Produtos</a>
+
+        <h2>Lista de Sapatos</h2>
+        <ul id="minhalista"></ul>
+    </main>
+
+    <footer>
+        © 2025 Maison Evangeline — Todos os direitos reservados.
+    </footer>
+
     <script>
-        async function buscaDados(){
-            const resposta = await fetch("http://localhost:8000/lista")
-            console.log(resposta)
-            if(resposta.status ===200){
-                const dados = await resposta.json()
-                console.log(dados)
-                console.log(dados[0].nome)
-                const ul = document.getElementById("minhalista")
-                for (let i = 0; i < dados.length; i++) {
-                    const element = dados[i];
-                    const novoli = document.createElement("lista")
-                    novoli.innerText = element.nome
-                    ul.appendChild(novoli)
-                }
-
-            }else{
-                if(resposta.status ===400){
-                    const dados = await resposta.json()
-                    alert(dados.mensagem)
-                }
-                else{
+        async function buscaDados() {
+            try {
+                const resposta = await fetch("http://localhost:8000/lista");
+                if (resposta.status === 200) {
+                    const dados = await resposta.json();
+                    const ul = document.getElementById("minhalista");
+                    dados.forEach((item) => {
+                        const li = document.createElement("li");
+                        li.innerText = item.nome;
+                        ul.appendChild(li);
+                    });
+                } else if (resposta.status === 400) {
+                    const dados = await resposta.json();
+                    alert(dados.mensagem);
+                } else {
                     alert("ERRO NÃO IDENTIFICADO");
                 }
+            } catch (erro) {
+                alert("Erro de conexão com o servidor.");
+                console.error(erro);
             }
         }
-        buscaDados()
+
+        buscaDados();
     </script>
+
 </body>
 </html>

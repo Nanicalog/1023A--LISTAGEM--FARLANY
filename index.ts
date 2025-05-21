@@ -1,6 +1,6 @@
 // Importando bibliotecas necessárias
-import mysql, { Connection } from 'mysql2/promise'; // Biblioteca para conectar ao MySQL de forma assíncrona
-import fastify, { FastifyRequest, FastifyReply } from 'fastify'; // Framework web rápido e leve
+import mysql, { Connection } from 'mysql2/promise'; //conectar ao MySQL de forma assincrona
+import fastify, { FastifyRequest, FastifyReply } from 'fastify'; 
 import cors from '@fastify/cors'; // Middleware para permitir requisições de outros domínios (CORS)
 
 const app = fastify(); // Inicializa o servidor Fastify
@@ -44,16 +44,16 @@ app.get('/lista', async (request: FastifyRequest, reply: FastifyReply) => {
         } else if (erro.code === 'ER_PARSE_ERROR') {
             reply.status(400).send({ mensagem: "ERRO: Você tem um erro de escrita em sua QUERY confira: VÍRGULAS, PARENTESES E NOME DE COLUNAS" });
         } else {
-            reply.status(500).send({ mensagem: "ERRO: NÃO IDENTIFICADO" }); // Erro interno genérico
+            reply.status(500).send({ mensagem: "ERRO: NÃO IDENTIFICADO" }); // Erro interno generico
         }
     } finally {
         if (conn) {
-            await conn.end(); // Fecha a conexão ao final
+            await conn.end(); // Fecha a conexao ao final
         }
     }
 });
 
-// Rota para buscar produtos (sapatos) por filtros: id, nome, tamanho e preço
+// Rota para buscar produtos (sapatos) por filtros: id, nome, tamanho e preco
 app.get('/sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
     let conn: Connection | null = null;
 
@@ -73,7 +73,7 @@ app.get('/sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
     let query = "SELECT * FROM lista WHERE 1=1"; // Base da query
     const values: any[] = []; // Lista de valores que serão inseridos na query
 
-    // Adiciona os filtros dinamicamente conforme os parâmetros enviados
+    // Adiciona os filtros dinamicamente conforme os parametros enviados
     if (id) {
         query += " AND id = ?";
         values.push(id);
@@ -95,7 +95,7 @@ app.get('/sapatos', async (request: FastifyRequest, reply: FastifyReply) => {
     }
 
     try {
-        conn = await createDatabaseConnection(); // Abre conexão
+        conn = await createDatabaseConnection(); // Abre conexao
         const [rows] = await conn.query<any>(query, values); // Executa a query com os filtros
 
         if (rows.length > 0) {
